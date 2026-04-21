@@ -175,21 +175,27 @@ def format_timestamp(ts, is_us_index=False):
         if isinstance(ts, (int, float)):
             from datetime import timezone
             dt = datetime.fromtimestamp(ts, tz=timezone.utc)
+            if is_us_index:
+                local_tz = pytz.timezone('US/Eastern')
+                dt_local = dt.astimezone(local_tz)
+                return dt_local.strftime('%Y-%m-%d %H:%M:%S') + " (美东时间)"
+            else:
+                local_tz = pytz.timezone('Asia/Shanghai')
+                dt_local = dt.astimezone(local_tz)
+                return dt_local.strftime('%Y-%m-%d %H:%M:%S') + " (北京时间)"
         elif hasattr(ts, 'year'):
             dt = ts
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=pytz.UTC)
+            if is_us_index:
+                if dt.tzinfo is None:
+                    dt = pytz.timezone('US/Eastern').localize(dt)
+                return dt.strftime('%Y-%m-%d %H:%M:%S') + " (美东时间)"
+            else:
+                if dt.tzinfo is None:
+                    bj_tz = pytz.timezone('Asia/Shanghai')
+                    dt = bj_tz.localize(dt)
+                return dt.strftime('%Y-%m-%d %H:%M:%S') + " (北京时间)"
         else:
             return str(ts)
-
-        if is_us_index:
-            local_tz = pytz.timezone('US/Eastern')
-            dt_local = dt.astimezone(local_tz)
-            return dt_local.strftime('%Y-%m-%d %H:%M:%S') + " (美东时间)"
-        else:
-            local_tz = pytz.timezone('Asia/Shanghai')
-            dt_local = dt.astimezone(local_tz)
-            return dt_local.strftime('%Y-%m-%d %H:%M:%S') + " (北京时间)"
     except Exception as e:
         return str(ts)
 
@@ -208,16 +214,7 @@ def main():
     for idx in INDICES:
         logger.info(f"Fetching index: {idx['指数名称']} ({idx['lp_code']})")
         is_us = idx['指数名称'] in ["纳斯达克100指数", "标普500指数", "道琼斯指数"]
-        price, ts = fetch_longport_candlesticks(ctx, idx['lp_code'], count=5)
-        if price is None:
-            try:
-                quotes = ctx.quote([idx['lp_code']])
-                if quotes:
-                    q = quotes[0]
-                    price = round(float(q.last_done), 2)
-                    ts = q.timestamp
-            except Exception as e:
-                logger.warning(f"Longport quote also failed for {idx['lp_code']}: {e}")
+        price, ts, source = fetch_longport_stock_data(ctx, idx['lp_code'])
 
         time_str = format_timestamp(ts, is_us) if ts else "获取失败"
         index_results.append({
@@ -225,7 +222,7 @@ def main():
             "指数代码": idx['指数代码'],
             "当前最新点数": price if price else "获取失败",
             "当前最新点数对应时间戳": time_str,
-            "数据来源": "Longport API"
+            "数据来源": source
         })
         time.sleep(0.3)
 

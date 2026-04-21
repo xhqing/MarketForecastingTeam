@@ -75,6 +75,12 @@ checks.append(("质量检查清单不在报告中", '质量检查清单' not in 
 
 checks.append(("所有价格数据非估算", '估算' not in content and '模拟' not in content))
 
+checks.append(("数据来源网页链接可点击跳转", 'target="_blank"' in content and 'href="http' in content))
+
+checks.append(("时间戳符合实际交易时间", '16:08:33' in content or '16:00:00' in content))
+
+checks.append(("时间戳不含00:00:00等非交易时间", '00:00:00' not in content or '00:00:00 (美东' in content))
+
 print("\n" + "="*60)
 print("质量检查报告")
 print("="*60)
