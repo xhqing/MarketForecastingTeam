@@ -30,7 +30,7 @@ checks.append(("CSV个股数据存在", os.path.exists(os.path.join(REPORT_DIR, 
 checks.append(("CSV牛熊证数据存在", os.path.exists(os.path.join(REPORT_DIR, 'cbbc_stock_data.csv'))))
 
 checks.append(("报告格式为HTML", latest_report.endswith('.html')))
-checks.append(("文件名YB+时间戳格式", bool(re.match(r'YB\d{14}\.html', latest_report))))
+checks.append(("文件名YB+序号+时间戳格式", bool(re.match(r'YB_\d{4}_\d{14}\.html', latest_report))))
 
 checks.append(("报告日期使用北京时间", '北京时间' in content and '报告日期' in content))
 
