@@ -17,24 +17,35 @@
 ```
 CBBC_TRAE/
 ├── prompt.md                          # AI Agent 研报生成 Prompt（核心配置文件）
-├── README.md                          # 项目说明文档
+├── config.py                          # API 凭证（不提交到 git）
+├── config_example.py                  # API 凭证配置模板
+├── README.md                          # 项目说明文档（中文）
+├── README_en.md                       # 项目说明文档（英文）
+├── fetch_market_data.py               # 市场数据获取脚本
+├── generate_report.py                 # 研报生成脚本
+├── quality_check.py                   # 质量校验脚本
+├── debug_timestamp.py                 # 时间戳调试脚本
+├── .gitignore                         # Git 忽略规则
+├── LICENSE                            # AGPL-3.0 许可证
 └── output/                            # 输出目录
-    ├── market_data_yahoo.csv          # Yahoo Finance API 获取的市场数据
-    └── extra_cbbc_stocks.csv          # 额外牛熊证个股数据
+    ├── index_data.csv                 # 指数数据表
+    ├── stock_data.csv                 # 指定个股数据表
+    ├── cbbc_stock_data.csv            # 牛熊证活跃个股数据表
+    └── YB_000X_YYYYMMDDHHMMSS.html    # 生成的研报文件
 ```
 
 ## 研报覆盖标的
 
 ### 指数（6个）
 
-| 指数        | 代码     |
-| --------- | ------ |
-| 恒生指数      | HSI    |
-| 恒生科技指数    | HSTECH |
-| 国企指数      | HSCEI  |
-| 纳斯达克100指数 | .NDX   |
-| 标普500指数   | .SPX   |
-| 道琼斯指数     | .DJI   |
+| 指数名称 | 代码 |
+|---------|------|
+| 恒生指数 | HSI |
+| 恒生科技指数 | HSTECH |
+| 国企指数 | HSCEI |
+| 纳斯达克100指数 | .NDX |
+| 标普500指数 | .SPX |
+| 道琼斯指数 | .DJI |
 
 ### 指定个股（27只港股）
 
@@ -46,20 +57,56 @@ CBBC_TRAE/
 
 ## 数据源
 
-| 优先级 | 数据源               | 说明            |
-| --- | ----------------- | ------------- |
-| 首选  | Longport 长桥 API   | 港股指数及个股实时行情   |
-| 备选  | Yahoo Finance API | 美股三大指数及港股行情补充 |
-| 备选  | AKShare / Tushare | A股及部分港股数据     |
-| 备选  | Alpha Vantage     | 全球股票及指数数据     |
+| 优先级 | 数据源 | 说明 |
+|--------|--------|------|
+| 首选 | Longport（长桥）API | 港股指数及个股实时行情 |
+| 备选 | Yahoo Finance API | 美股三大指数及港股行情补充 |
+| 备选 | AKShare / Tushare | A股及部分港股数据 |
+| 备选 | Alpha Vantage | 全球股票及指数数据 |
+
+## API 配置
+
+本项目需要 [Longport（长桥）](https://www.longbridge.com/) API 账户。在项目根目录创建 `config.py` 文件并填入您的凭证：
+
+```python
+LONGPORT_APP_KEY = "your_app_key"
+LONGPORT_APP_SECRET = "your_app_secret"
+LONGPORT_ACCESS_TOKEN = "your_access_token"
+```
+
+⚠️ **重要**：`config.py` 已通过 `.gitignore` 排除在版本控制之外。请勿将 API 凭证提交到仓库。
 
 ## 使用方式
 
 1. 在 Trae IDE 中打开本项目
-2. 给 AI Agent (TRAE CN SOLO GLM5.1) 明确的指令："""根据当前目录中的prompt.md中的具体需求生成一份最新的市场调研报告，该研报生成之后直接使用浏览器打开"""
-3. Agent 将自动执行：数据获取 → 事件分析 → 指数研判 → 个股分析 → 生成研报
-4. 研报输出至 `output/` 目录（HTML 格式）
+2. 给 AI Agent (TRAE CN SOLO GLM5.1) 下达指令：
+   > "根据当前目录中的prompt.md中的具体需求生成一份最新的市场调研报告，该研报生成之后直接使用浏览器打开"
+3. Agent 将自动执行：数据获取 → 事件分析 → 指数研判 → 个股分析 → 研报生成
+4. 研报输出至 `output/` 目录（HTML 格式，命名规范：`YB_000X_YYYYMMDDHHMMSS.html`）
+
+## 研报特性
+
+- **HTML 格式**，含可点击的目录导航
+- **实时数据**，附带准确时间戳（港股时间 / 美东时间）
+- **情景概率分析**，对未来事件进行概率预判
+- **9字段个股分析**（趋势预判、目标价、仓位建议、核心逻辑）
+- **完整推理链**（宏观→指数→个股）
+- **参考资料链接**，附完整 URL 和来源说明
+
+## 质量检查
+
+每份生成的研报均需通过 30+ 项质量校验，包括：
+- ✅ 正确的文件命名规范
+- ✅ 指数和个股所有必填字段完整
+- ✅ 准确的时间戳（实际交易时间，非K线日期）
+- ✅ 参考资料链接可点击
+- ✅ 情景分析含概率值
+- ✅ 无估算/模拟数据
+
+## 许可证
+
+本项目采用 **GNU Affero 通用公共许可证 v3.0** (AGPL-3.0)。详见 [LICENSE](LICENSE) 文件。
 
 ## 免责声明
 
-本项目生成的研报仅供参考，不构成任何投资建议。市场有风险，投资需谨慎。牛熊证为高风险衍生产品，回收后可能损失全部投资，投资者应充分了解产品条款和风险后谨慎决策。
+本项目生成的研报仅供参考，不构成任何投资建议。市场投资有风险。牛熊证为高风险衍生产品，回收后可能损失全部投资，投资者应充分了解产品条款和风险后谨慎决策。
