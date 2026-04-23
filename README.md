@@ -97,7 +97,9 @@ LONGPORT_ACCESS_TOKEN = "your_access_token"
 
 1. 在 Trae IDE 中打开本项目，然后切换到SOLO模式
 2. 向 AI Agent（TRAE CN SOLO GLM5.1）发送指令：
-   > "根据当前目录中的prompt.md中的具体需求生成一份最新的市场研报，该研报生成之后直接使用浏览器打开"
+```Markdown
+根据当前目录中的prompt.md中的具体需求生成一份最新的市场研报，该研报生成之后直接使用浏览器打开
+```
 3. Agent 将自动执行：数据获取 → 事件分析 → 指数研判 → 个股分析 → 研报生成
 4. 研报输出到 `YB_000X/` 目录，HTML 格式（命名规则：`YB_XXXX_YYYYMMDDHHMMSS.html`）
 

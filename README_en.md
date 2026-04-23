@@ -15,7 +15,7 @@ This project leverages an AI Agent (TRAE CN SOLO GLM5.1) to automatically genera
 ## Project Structure
 
 ```
-CBBC_TRAE/
+CrossMarketStrategy
 ├── prompt.md              # AI Agent report generation prompt (core config)
 ├── config.py              # API credentials (NOT committed to git)
 ├── config_example.py      # Template for API credentials
@@ -62,7 +62,7 @@ Read from `hk_shares.hkex_stocks` in `targets.yaml`. Currently includes Tencent 
 
 ### US ETFs
 
-Read from `us_shares.etf` in `targets.yaml`. Currently includes Nasdaq 100 ETF (QQQ), S&P 500 ETF (SPY), and Dow Jones Industrial ETF (DIA).
+Read from `us_shares.etf` in `targets.yaml`. Currently includes Nasdaq 100 ETF (QQQ), S\&P 500 ETF (SPY), and Dow Jones Industrial ETF (DIA).
 
 ### Hong Kong ETFs
 
@@ -95,9 +95,11 @@ LONGPORT_ACCESS_TOKEN = "your_access_token"
 
 ## Usage
 
-1. Open this project in Trae IDE
+1. Open this project in Trae IDE，then change to the SOLO mode
 2. Give the AI Agent (TRAE CN SOLO GLM5.1) the following instruction:
-   > "Generate a latest market research report based on the specific requirements in prompt.md in the current directory. After the report is generated, open it directly in the browser."
+```Markdown
+Generate a latest market research report based on the specific requirements in prompt.md in the current directory. After the report is generated, open it directly in the browser.
+```
 3. The Agent will automatically execute: data fetching → event analysis → index forecast → stock analysis → report generation
 4. Reports are output to the `YB_000X/` directory in HTML format (naming: `YB_XXXX_YYYYMMDDHHMMSS.html`)
 
