@@ -15,7 +15,7 @@
 ## 项目结构
 
 ```
-CBBC_TRAE/
+CrossMarketStrategy
 ├── prompt.md              # AI Agent 研报生成 Prompt（核心配置文件）
 ├── config.py              # API 凭证（不提交到 git）
 ├── config_example.py      # API 凭证配置模板
@@ -60,6 +60,10 @@ CBBC_TRAE/
 
 从 `targets.yaml` 的 `hk_shares.hkex_stocks` 中读取，当前包含腾讯控股、阿里巴巴、小米、快手、京东、美团、紫金矿业、中芯国际、华虹半导体、泡泡玛特、中国神华、宁德时代、赣锋锂业、昆仑能源、中国石油化工股份、国泰君安国际、中国宏桥、招商银行、建设银行、中国银行、汇丰控股、信达生物、药明生物、中国海洋石油、中国石油股份、工商银行、比亚迪股份、香港交易所、友邦保险、中国人寿、中国平安、中国移动、网易、百度集团、理想汽车、小鹏汽车、安踏体育、地平线机器人等。
 
+### 美股ETF
+
+从 `targets.yaml` 的 `us_shares.etf` 中读取，当前包含纳斯达克100指数ETF（QQQ）、标普500指数ETF（SPY）、道琼斯工业指数ETF（DIA）。
+
 ### 港股ETF
 
 从 `targets.yaml` 的 `hk_shares.hkex_etf` 中读取，当前包含盈富基金、南方恒生科技、恒生中国企业。
@@ -91,7 +95,7 @@ LONGPORT_ACCESS_TOKEN = "your_access_token"
 
 ## 使用方法
 
-1. 在 Trae IDE 中打开本项目
+1. 在 Trae IDE 中打开本项目，然后切换到SOLO模式
 2. 向 AI Agent（TRAE CN SOLO GLM5.1）发送指令：
    > "根据当前目录中的prompt.md中的具体需求生成一份最新的市场研报，该研报生成之后直接使用浏览器打开"
 3. Agent 将自动执行：数据获取 → 事件分析 → 指数研判 → 个股分析 → 研报生成

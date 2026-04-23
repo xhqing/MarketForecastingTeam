@@ -60,6 +60,10 @@ All target instruments are managed through the `targets.yaml` configuration file
 
 Read from `hk_shares.hkex_stocks` in `targets.yaml`. Currently includes Tencent Holdings, Alibaba, Xiaomi, Kuaishou, JD.com, Meituan, Zijin Mining, SMIC, Hua Hong Semiconductor, Pop Mart, China Shenhua Energy, CATL, Ganfeng Lithium, Kunlun Energy, Sinopec, Guotai Junan International, China Hongqiao, China Merchants Bank, China Construction Bank, Bank of China, HSBC, Innovent Biologics, WuXi Biologics, CNOOC, PetroChina, ICBC, BYD, HKEX, AIA Group, China Life Insurance, Ping An Insurance, China Mobile, NetEase, Baidu, Li Auto, XPeng, ANTA Sports, Horizon Robotics, and more.
 
+### US ETFs
+
+Read from `us_shares.etf` in `targets.yaml`. Currently includes Nasdaq 100 ETF (QQQ), S&P 500 ETF (SPY), and Dow Jones Industrial ETF (DIA).
+
 ### Hong Kong ETFs
 
 Read from `hk_shares.hkex_etf` in `targets.yaml`. Currently includes Tracker Fund of Hong Kong, CSOP Hang Seng Tech, and Hang Seng H-Share.
