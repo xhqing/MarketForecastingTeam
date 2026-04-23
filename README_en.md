@@ -1,4 +1,4 @@
-# CBBC\_TRAE
+# CrossMarketStrategy
 
 Cross-market Major Events & Hong Kong Stock Leaders Strategy Research — An AI Agent-powered automated research report generation project.
 

@@ -1,4 +1,4 @@
-# CBBC\_TRAE
+# CrossMarketStrategy
 
 跨市场重大事件与港股龙头策略研判 — 基于 AI Agent 的自动化研报生成项目
 
