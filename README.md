@@ -1,21 +1,21 @@
-# CrossMarketStrategy
+# MarketForecastingAgent
 
-Cross-market Major Events & Hong Kong Stock Leaders Strategy Research — An AI Agent-powered automated research report generation project.
+AI-Driven Market Forecasting System — A Research Project on AI Agent's Financial Market Analysis and Prediction
 
 ## Overview
 
-This project leverages an AI Agent (TRAE CN SOLO GLM5.1) to automatically generate cross-market strategy research reports, covering the A-share, Hong Kong stock, and US stock markets, with a core focus on Hong Kong stocks. Report content includes:
+This project leverages an AI Agent (TRAE CN SOLO GLM5.1) to conduct intelligent market analysis and forecasting, covering the A-share, Hong Kong stock, and US stock markets. The AI Agent performs comprehensive market research, including:
 
 - **Data Acquisition**: Programmatic fetching of latest market data via Longport API
 - **Major Events Analysis**: Recent events + one-week forward event predictions (with probabilistic scenario analysis)
-- **Index Forecast**: Trend outlooks and target levels for 6 major indices
+- **Index Forecast**: Trend outlooks and target levels for major indices
 - **Stock Analysis**: In-depth analysis of Hong Kong stocks dynamically loaded from `targets.json`
 - **Reasoning Chain**: Complete macro → index → stock reasoning process
 
 ## Project Structure
 
 ```
-CrossMarketStrategy
+MarketForecastingAgent
 ├── prompt.md              # AI Agent report generation prompt (core config)
 ├── config.py              # API credentials (NOT committed to git)
 ├── config_example.py      # Template for API credentials
