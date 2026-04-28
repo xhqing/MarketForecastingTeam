@@ -1,10 +1,10 @@
-# MarketForecastingAgent
+# MarketForecastingTeam
 
 AI-Driven Market Forecasting System — A Research Project on AI Agent's Financial Market Analysis and Prediction
 
 ## Overview
 
-This project leverages an AI Agent (TRAE CN SOLO GLM5.1) to conduct intelligent market analysis and forecasting, covering the A-share, Hong Kong stock, and US stock markets. The AI Agent performs comprehensive market research, including:
+This project leverages AI Agents to conduct intelligent market analysis and forecasting, covering the A-share, Hong Kong stock, and US stock markets. The AI Agent performs comprehensive market research, including:
 
 - **Data Acquisition**: Programmatic fetching of latest market data via Longport API
 - **Major Events Analysis**: Recent events + one-week forward event predictions (with probabilistic scenario analysis)
@@ -15,7 +15,7 @@ This project leverages an AI Agent (TRAE CN SOLO GLM5.1) to conduct intelligent 
 ## Project Structure
 
 ```
-MarketForecastingAgent
+MarketForecastingTeam
 ├── prompt.md              # AI Agent report generation prompt (core config)
 ├── config.py              # API credentials (NOT committed to git)
 ├── config_example.py      # Template for API credentials
@@ -24,8 +24,7 @@ MarketForecastingAgent
 ├── generate_report.py     # Report generation script
 ├── quality_check.py       # Quality validation script
 ├── debug_timestamp.py     # Timestamp debugging script
-├── README.md              # Project documentation (Chinese)
-├── README_en.md           # Project documentation (English)
+├── README.md              # Project documentation
 ├── .gitignore             # Git ignore rules
 ├── LICENSE                # AGPL-3.0 License
 ├── output/                # Data files directory
@@ -96,12 +95,14 @@ LONGPORT_ACCESS_TOKEN = "your_access_token"
 ## Usage
 
 1. Open this project in Trae IDE，then change to the SOLO mode
-2. Give the AI Agent (TRAE CN SOLO GLM5.1) the following instruction:
+2. Give the AI Agent Leader (TRAE CN SOLO Coder) the following instruction:
+
 ```Markdown
 Generate a latest market research report based on the specific requirements in prompt.md in the current directory. After the report is generated, open it directly in the browser.
 ```
-3. The Agent will automatically execute: data fetching → event analysis → index forecast → stock analysis → report generation
-4. Reports are output to the `YB_000X/` directory in HTML format (naming: `YB_XXXX_YYYYMMDDHHMMSS.html`)
+
+1. The Agent will automatically execute: data fetching → event analysis → index forecast → stock analysis → report generation
+2. Reports are output to the `YB_000X/` directory in HTML format (naming: `YB_XXXX_YYYYMMDDHHMMSS.html`)
 
 ## Report Features
 
