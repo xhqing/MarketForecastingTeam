@@ -1,7 +1,7 @@
-指数名称,指数代码,当前最新点数,当前最新点数对应时间戳,数据来源
-恒生指数,HSI,25802.75,2026-04-24 15:59:00 (北京时间),https://cn.stockq.org/index/HSI.php
-恒生科技指数,HSTECH,4826.62,2026-04-24 09:33:00 (北京时间),http://m.toutiao.com/group/7632131309481034276/
-国企指数,HSCEI,8680.33,2026-04-24 09:33:00 (北京时间),http://m.toutiao.com/group/7632131309481034276/
-标普500指数,.SPX,7108.40,2026-04-23 16:00:00 (美东时间),https://apnews.com/article/wall-street-stocks-dow-nasdaq-9b6c3bbdfe2c0de91ba07a921ef2c275
-纳斯达克100指数,.NDX,26700.00,2026-04-23 16:00:00 (美东时间),https://fred.stlouisfed.org/series/NASDAQ100
-道琼斯工业指数,.DJI,49310.32,2026-04-23 16:00:00 (美东时间),https://apnews.com/article/wall-street-stocks-dow-nasdaq-9b6c3bbdfe2c0de91ba07a921ef2c275
+﻿指数名称,指数代码,当前最新点数,当前最新点数对应时间戳,数据来源
+恒生指数,HSI,25925.65039,2026-04-27 16:00:00 (北京时间),https://cn.stockq.org/index/HSI.php
+恒生科技指数,HSTECH,4939.83984,2026-04-27 16:00:00 (北京时间),https://cn.stockq.org/index/HSTECH.php
+国企指数,HSCEI,8756.32031,2026-04-27 16:00:00 (北京时间),https://cn.stockq.org/index/HSCEI.php
+纳斯达克100指数,.NDX,27305.6777,2026-04-27 16:00:00 (美东时间),https://finance.yahoo.com/quote/%5ENDX
+标普500指数,.SPX,7173.9102,2026-04-27 16:00:00 (美东时间),https://finance.yahoo.com/quote/%5ESPX
+道琼斯工业指数,.DJI,49167.7891,2026-04-27 16:00:00 (美东时间),https://finance.yahoo.com/quote/%5EDJI

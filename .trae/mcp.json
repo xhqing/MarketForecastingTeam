@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    // stdio type MCP Server configuration example:
+    // "server_name": {
+    //   "command": "npx",
+    //   "args": ["-y", "package-name"],
+    //   "env": {
+    //     "API_TOKEN": "your_token_here"
+    //   }
+    // }
+    //
+    // http type MCP Server configuration example:
+    // "server_name": {
+    //   "url": "https://example.com/mcp",
+    //   "headers": {
+    //     "Authorization": "Bearer your_token_here"
+    //   }
+    // }
+    //
+    // Volcengine "发现报告" (Discovery Report) MCP Server
+    // Get your专属 URL from: https://www.volcengine.com/ats/mcp_detail\?name\=发现报告
+    // After obtaining the URL, uncomment and fill in the following:
+    // "volcengine-discovery-report": {
+    //   "url": "https://your-volcengine-mcp-url/mcp",
+    //   "headers": {
+    //     "Authorization": "Bearer your_token_here"
+    //   }
+    // }
+
+  }
+}
