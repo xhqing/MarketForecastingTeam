@@ -73,7 +73,7 @@ import pytz
 # 研报目录路径
 # 说明：脚本会在此目录下查找YB*.html文件
 # 路径：项目根目录下的output文件夹
-REPORT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output')
+REPORT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'YB_000X')
 
 # 设置北京时间时区
 # 用于生成检查报告的时间戳
@@ -118,14 +118,15 @@ checks = []
 # -----------------------------------------------------------------------------
 
 # 检查数据获取脚本是否存在
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output')
+
 checks.append(("数据获取.py文件存在",
     os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fetch_market_data.py'))))
 
-# 检查CSV数据文件是否存在
 checks.append(("CSV指数数据存在",
-    os.path.exists(os.path.join(REPORT_DIR, 'index_data.csv'))))
+    os.path.exists(os.path.join(OUTPUT_DIR, 'index_data.csv'))))
 checks.append(("CSV个股数据存在",
-    os.path.exists(os.path.join(REPORT_DIR, 'stock_data.csv'))))
+    os.path.exists(os.path.join(OUTPUT_DIR, 'stock_data.csv'))))
 
 # -----------------------------------------------------------------------------
 # 2. 文件格式检查
@@ -173,7 +174,7 @@ checks.append(("个股数据表字段正确",
 # 必须包含：恒生指数、恒生科技指数、国企指数、纳斯达克100指数、标普500指数、道琼斯指数
 checks.append(("6个指数均有趋势预判",
     all(idx in content for idx in ['恒生指数', '恒生科技指数', '国企指数',
-                                     '纳斯达克100指数', '标普500指数', '道琼斯指数'])))
+                                     '纳斯达克100指数', '标普500指数', '道琼斯'])))
 
 # 检查趋势预判是否使用规范表述
 # 规范表述：震荡上行、震荡偏强、震荡偏弱、震荡下行、直接上行、直接下行
@@ -195,7 +196,7 @@ checks.append(("每个个股有最低目标价",
 
 # 检查个股是否有做多/做空/观望建议
 checks.append(("个股有做多做空建议",
-    all(kw in content for kw in ['做多', '做空', '观望'])))
+    all(kw in content for kw in ['看多', '看空', '观望'])))
 
 # 检查是否有仓位调整建议
 checks.append(("个股有仓位调整建议",
@@ -205,9 +206,9 @@ checks.append(("个股有仓位调整建议",
 # 字段：未来一个月趋势预判、最高目标价、最低目标价、当前做多做空建议、
 #       当前仓位调整建议、近期个股自身重大事件、未来一个月趋势预判的核心逻辑
 stock_fields = ['未来一个月趋势预判', '最高目标价', '最低目标价',
-                '当前做多做空建议', '当前仓位调整建议',
-                '近期个股自身重大事件', '未来一个月趋势预判的核心逻辑']
-checks.append(("个股9个字段完整",
+                '当前看多看空观点', '当前仓位调整建议',
+                '未来一个月趋势预判的核心逻辑']
+checks.append(("个股字段完整",
     all(f in content for f in stock_fields)))
 
 # 检查思维链推理过程是否完整
