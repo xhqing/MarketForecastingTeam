@@ -98,7 +98,7 @@ LONGPORT_ACCESS_TOKEN = "your_access_token"
 2. Give the AI Agent Leader (TRAE CN SOLO Coder) the following instruction:
 
 ```Markdown
-Generate a latest market research report based on the specific requirements in prompt.md in the current directory. After the report is generated, open it directly in the browser.
+与你的下级智能体通力合作，根据当前目录下 prompt.md 文件中的具体要求，生成一份最新的市场研究报告。报告生成后，直接在浏览器中打开它。
 ```
 
 1. The Agent will automatically execute: data fetching → event analysis → index forecast → stock analysis → report generation
