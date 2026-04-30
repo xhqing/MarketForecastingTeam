@@ -344,9 +344,9 @@ def format_trend_probs(probs):
     return "<br>".join(parts)
 
 
-def make_index_row(ia):
+def make_index_text(ia):
     """
-    生成指数分析表格的一行HTML代码
+    生成指数分析的文字描述（不含表格）
 
     参数：
         ia (dict): 指数分析数据字典，包含以下字段：
@@ -355,35 +355,35 @@ def make_index_row(ia):
             - current: 当前最新点数
             - trend: 趋势判断
             - trend_probs: 趋势概率分布
+            - trend_reasons: 趋势情景理由
             - high: 最高目标点数
             - low: 最低目标点数
             - logic: 核心逻辑
 
     返回：
-        str: HTML表格行<tr>标签，包含9个<td>单元格：
-            1. 指数名称
-            2. 指数代码
-            3. 当前最新点数（千分位格式化）
-            4. 未来半年趋势预判（含概率分布）
-            5. 截止年底最高目标点数（千分位格式化）
-            6. 最高目标点数相对当前涨幅（百分比）
-            7. 截止年底最低目标点数（千分位格式化）
-            8. 最低目标点数相对当前跌幅（百分比）
-            9. 核心逻辑
-
-    计算说明：
-        - high_rise: (high - current) / current * 100，保留2位小数
-        - low_fall: (low - current) / current * 100，保留2位小数
+        str: HTML格式的指数文字描述
     """
-    high_rise = calc_rise(ia["current"], ia["high"])
-    low_fall = calc_fall(ia["current"], ia["low"])
-    trend_display = f"{ia['trend']}<br>{format_trend_probs(ia.get('trend_probs'))}"
-    return f"""<tr>
-<td>{ia['name']}</td><td>{ia['code']}</td><td>{ia['current']:,.2f}</td>
-<td>{trend_display}</td><td>{ia['high']:,.2f}</td><td>{high_rise}%</td>
-<td>{ia['low']:,.2f}</td><td>{low_fall}%</td>
-<td>{ia['logic']}</td>
-</tr>"""
+    probs = ia.get('trend_probs', {})
+    reasons = ia.get('trend_reasons', {})
+    
+    trend_items = []
+    for scenario, prob in probs.items():
+        reason = reasons.get(scenario, "")
+        if reason:
+            trend_items.append(f"<li><strong>{scenario}（{prob}%）</strong>：{reason}</li>")
+        else:
+            trend_items.append(f"<li><strong>{scenario}（{prob}%）</strong></li>")
+    
+    trend_list = "\n".join(trend_items)
+    
+    return f"""
+<div style="margin-bottom: 25px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #1a237e;">
+<h4 style="color: #1a237e; margin-bottom: 10px;">{ia['name']}（{ia['code']}）| 当前点位：{ia['current']:,.2f}</h4>
+<p style="margin: 8px 0;"><strong>未来半年趋势预判：</strong></p>
+<ul style="margin: 8px 0 8px 25px; padding-left: 0;">{trend_list}</ul>
+<p style="margin: 8px 0;"><strong>核心逻辑：</strong>{ia['logic']}</p>
+</div>
+"""
 
 
 def make_stock_row(sa):
@@ -540,9 +540,8 @@ etf_table_csv = "".join(etf_table_rows)
 # 使用列表推导式和对应的make_*_row函数生成所有分析表格行
 # 输入：index_analysis、stock_analysis、etf_analysis列表
 # 输出：拼接后的HTML表格行字符串
-index_rows = "".join(make_index_row(ia) for ia in index_analysis)
+index_texts = "".join(make_index_text(ia) for ia in index_analysis)
 stock_rows = "".join(make_stock_row(sa) for sa in stock_analysis)
-etf_rows = "".join(make_etf_row(ea) for ea in etf_analysis)
 
 # =============================================================================
 # 完整HTML研报生成
@@ -688,21 +687,7 @@ body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC
 
 <div class="section" id="section3">
 <h2>二、指数研判</h2>
-
-<table class="data-table">
-<thead>
-<tr>
-<th>指数名称</th><th>指数代码</th><th>当前最新点数</th>
-<th>未来半年趋势预判</th>
-<th>截止2026年12月31日最高目标点数</th><th>最高目标点数相对当前涨幅</th>
-<th>截止2026年12月31日最低目标点数</th><th>最低目标点数相对当前跌幅</th>
-<th>未来半年趋势预判的核心逻辑</th>
-</tr>
-</thead>
-<tbody>
-{index_rows}
-</tbody>
-</table>
+{index_texts}
 </div>
 
 <div class="section" id="section4">

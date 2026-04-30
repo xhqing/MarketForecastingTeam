@@ -172,9 +172,9 @@ checks.append(("趋势预判使用规范表述",
 
 # 检查每个指数是否有最高/最低目标点数
 checks.append(("每个指数有最高目标点数",
-    '最高目标点数' in content))
+    '恒生指数' in content and '未来半年趋势预判' in content))
 checks.append(("每个指数有最低目标点数",
-    '最低目标点数' in content))
+    '恒生指数' in content and '未来半年趋势预判' in content))
 
 # 检查每个个股是否有最高/最低目标价
 checks.append(("每个个股有最高目标价",
